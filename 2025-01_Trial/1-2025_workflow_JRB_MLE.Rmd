@@ -7,9 +7,6 @@ output: html_document
 
 # Set Up
 
-This code is adapted from J.Behrens' dissertation. The code was adapted from code
-created by N.Marzolf: https://aslopubs.onlinelibrary.wiley.com/doi/10.1002/lol2.10407.
-
 ```{r setup, echo = FALSE, warning= FALSE, message=FALSE, results='hide', include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
@@ -23,8 +20,6 @@ projdir <- getwd() # Make sure you have the R Project open!
 # Preparing Data for Modeling
 ## Step 1
 
-This will source in all functions (except this workflow) into the Global Env ----
-
 ```{r}
 scripts <- list.files('code/', 
                       pattern = '*.R', 
@@ -35,8 +30,6 @@ sapply(scripts, source, .GlobalEnv)
 ```
 
 ## Step 2
-
-Before you model  ----
 
 ```{r}
 ## this fun installs streamMetabolizer (and dependencies) and rstan (and dependencies) from github
@@ -60,18 +53,8 @@ library(StreamPULSE)
 lapply(c('cli', 'fansi', 'vctrs'), library, character.only = TRUE)
 ```
 
-## Step 3
-
-Get the data ----
-
-Data should be prepared with: solar.time, DO.obs, DO.sat, depth, temp.water, light, discharge
-
-We save this in the folder titled "data/sm_input/SITENAME_sm_input".
-
 # Model in MLE
 ## Step 4
-
-model and evaluate using MLE ----
 
 ```{r}
 # the user will have to define which years (calendar) they are interested in
