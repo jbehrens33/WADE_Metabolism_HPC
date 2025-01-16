@@ -1,13 +1,5 @@
 # Set Up
 
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-
-## Clear environment
-rm(list = ls())
-
-## Set project directory 
-projdir <- getwd() # Make sure you have the R Project open! 
-
 # Preparing Data for Modeling
 ## Step 1
 
@@ -48,4 +40,4 @@ model_mle(years = 2021)
 
 # evaluate the MLE outputs
 mle_eval()
-```
+
