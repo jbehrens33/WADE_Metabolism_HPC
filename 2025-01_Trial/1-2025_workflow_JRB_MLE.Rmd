@@ -1,0 +1,144 @@
+---
+title: "Metabolism Modeling Workflow"
+author: "Jonny Behrens and Nick Marzolf"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Set Up
+
+This code is adapted from J.Behrens' dissertation. The code was adapted from code
+created by N.Marzolf: https://aslopubs.onlinelibrary.wiley.com/doi/10.1002/lol2.10407.
+
+```{r setup, echo = FALSE, warning= FALSE, message=FALSE, results='hide', include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+## Clear environment
+rm(list = ls())
+
+## Set project directory 
+projdir <- getwd() # Make sure you have the R Project open! 
+```
+
+# Preparing Data for Modeling
+## Step 1
+
+This will source in all functions (except this workflow) into the Global Env ----
+
+```{r}
+scripts <- list.files('code/', 
+                      pattern = '*.R', 
+                      full.names = TRUE)
+
+# source them in 
+sapply(scripts, source, .GlobalEnv)
+```
+
+## Step 2
+
+Before you model  ----
+
+```{r}
+## this fun installs streamMetabolizer (and dependencies) and rstan (and dependencies) from github
+prep_bayes_model()
+
+# if this returns an error, running this below will suffice
+# install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+# install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+# remotes::install_github("https://github.com/appling/unitted")
+# remotes::install_github("https://github.com/DOI-USGS/streamMetabolizer")
+
+# Load in the remaining packages
+library('tidyverse')
+library('rstan')
+library('StanHeaders')
+library('unitted')
+library('streamMetabolizer')
+library(StreamPULSE)
+
+#install.packages(c('cli', 'fansi', 'vctrs'))
+lapply(c('cli', 'fansi', 'vctrs'), library, character.only = TRUE)
+```
+
+## Step 3
+
+Get the data ----
+
+Data should be prepared with: solar.time, DO.obs, DO.sat, depth, temp.water, light, discharge
+
+We save this in the folder titled "data/sm_input/SITENAME_sm_input".
+
+# Model in MLE
+## Step 4
+
+model and evaluate using MLE ----
+
+```{r}
+# the user will have to define which years (calendar) they are interested in
+model_mle(years = 2021)
+```
+
+```{r}
+# evaluate the MLE outputs
+mle_eval()
+```
+
+# Some Exploration Before In Depth Modeling
+
+```{r}
+# NC_NHC_raw <- readRDS("data/raw/NC_NHC_raw.rds")
+# 
+# NC_NHC<-NC_NHC_raw$data %>%
+#   pivot_wider(names_from = "variable", values_from = "value") %>% 
+#   mutate(year = year(DateTime_UTC)) %>% 
+#   mutate(day = as.Date(DateTime_UTC)) 
+# 
+# NC_NHC_Daily<-NC_NHC %>% 
+#   filter(flagtype != "Bad Data") %>% 
+#   group_by(day, site) %>%
+#   summarize(across(`AirPres_kPa`:`WaterTemp_C`, mean), .groups = "keep") %>% 
+#   mutate(year = year(day)) %>% 
+#   mutate(data_missing = if_else(is.na(WaterPres_kPa)|is.na(WaterTemp_C)|is.na(DO_mgL)|is.na(AirPres_kPa), "y", "n"))
+# 
+# plot1<-NC_NHC_Daily %>% 
+#   ggplot(aes(data_missing)) +
+#   geom_bar() +
+#   theme_classic() +
+#   facet_wrap(~year) +   
+#   theme(legend.position = "bottom") 
+# plot1
+# 
+# 
+# for(i in c(3:6)) {                              # Printing ggplot within for-loop
+# 
+#   plots<-NC_NHC_Daily %>% 
+#     rename(value = i) %>% 
+#     ggplot(aes(x= day, y = value, color=year)) +
+#     geom_point() +
+#     theme_classic() +
+#   #  facet_wrap(~year) +   
+#     ylab(paste(colnames(NC_NHC[i]))) + 
+#     labs(title = paste(colnames(NC_NHC_Daily[i]), " vs. Time")) +
+#     theme(legend.position = "bottom") 
+#   
+#   print(plots)
+# }
+```
+
+```{r}
+# for(i in c(6:9)) {                              # Printing ggplot within for-loop
+# 
+#   plots<-NC_NHC %>% 
+#     rename(value = i) %>% 
+#     ggplot(aes(x= DateTime_UTC, y = value, color=flagtype)) +
+#     geom_point() +
+#     theme_classic() +
+#   #  facet_wrap(~year) +   
+#     ylab(paste(colnames(NC_NHC[i]))) + 
+#     labs(title = paste(colnames(NC_NHC[i]), " vs. Time")) +
+#     theme(legend.position = "bottom") 
+#   
+#   print(plots)
+# }
+```
+
