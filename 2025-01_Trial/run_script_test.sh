@@ -1,3 +1,4 @@
+#!/bin/sh
 #SBATCH -A cli185
 #SBATCH -J trialRpackageload
 #SBATCH -o %x-%j.out
