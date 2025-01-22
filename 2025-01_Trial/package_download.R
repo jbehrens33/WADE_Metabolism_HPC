@@ -1,5 +1,5 @@
 options(repos = "https://cran.rstudio.com/")
 
-install.packages("groundhog")
+install_version("groundhog", version = "3.1.2", repos = "http://cran.us.r-project.org")
 
 groundhog.library("tidyverse", "2023-04-22")
