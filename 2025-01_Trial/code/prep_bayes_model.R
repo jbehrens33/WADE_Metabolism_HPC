@@ -1,15 +1,15 @@
 prep_bayes_model <- function() {
-  tryCatch({
-    library('rstan')
-    library('StanHeaders')
-  },
-  error = function(e){
-    install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
-    install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
-    library('rstan')
-    library('StanHeaders')
-  }
-  )
+  # tryCatch({
+  #   library('rstan')
+  #   library('StanHeaders')
+  # },
+  # error = function(e){
+  #   install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+  #   install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+  #   library('rstan')
+  #   library('StanHeaders')
+  # }
+  # )
   
   # load streamMetabolizer 0.12.0
   # version 0.12.0 is required, so easiest path is to install from github

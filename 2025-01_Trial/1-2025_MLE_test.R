@@ -2,6 +2,7 @@
 
 # Preparing Data for Modeling
 ## Step 1
+#install.packages('remotes', repos='http://cran.us.r-project.org')
 
 scripts <- list.files('code/', 
                       pattern = '*.R', 
@@ -13,7 +14,7 @@ sapply(scripts, source, .GlobalEnv)
 ## Step 2
 
 ## this fun installs streamMetabolizer (and dependencies) and rstan (and dependencies) from github
-prep_bayes_model()
+# prep_bayes_model()
 
 # if this returns an error, running this below will suffice
 # install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
@@ -23,8 +24,8 @@ prep_bayes_model()
 
 # Load in the remaining packages
 library('tidyverse')
-library('rstan')
-library('StanHeaders')
+#library('rstan')
+#library('StanHeaders')
 library('unitted')
 library('streamMetabolizer')
 library(StreamPULSE)
