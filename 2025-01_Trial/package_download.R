@@ -1,6 +1,10 @@
 options(repos = "https://cran.rstudio.com/")
 
-library("remotes")
-install_version("groundhog", version = "3.1.2", repos = "https://cran.rstudio.com")
+#library("remotes")
+library("groundhog")
+# Feel free to update below depending on the version of R loaded on CADES
+#install_version("groundhog", version = "3.1.2", repos = "https://cran.rstudio.com")
 
-groundhog.library("tidyverse", "2023-04-22")
+# This will download libraries based on the version available a month after
+# the release of the version of R that is loaded into CADES
+groundhog.library("ggplot2", "2023-04-22")
