@@ -1,4 +1,4 @@
-options(repos = "https://cran.rstudio.com/")
+options(repos = "https://cran.rstudio.com")
 
 #library("remotes")
 library("groundhog")
