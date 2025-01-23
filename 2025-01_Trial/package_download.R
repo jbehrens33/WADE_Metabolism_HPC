@@ -7,4 +7,7 @@ library("groundhog")
 
 # This will download libraries based on the version available a month after
 # the release of the version of R that is loaded into CADES
-groundhog.library("ggplot2", "2023-04-22")
+packages<-c(#"tidyverse", 
+            "unitted", "StanHeaders", "rstan")
+
+groundhog.library(packages, "2023-04-22")
