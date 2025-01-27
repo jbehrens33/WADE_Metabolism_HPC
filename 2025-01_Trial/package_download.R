@@ -1,5 +1,6 @@
-#options(repos = "https://cran.rstudio.com")
+options(repos = "https://cran.rstudio.com")
 
+install.packages("devtools")
 #install.packages("remotes")
 # Feel free to update below depending on the version of R loaded on CADES
 #install_version("groundhog", version = "3.1.2", repos = "https://cran.rstudio.com")
@@ -8,7 +9,6 @@
 # library("remotes")
 #library("groundhog")
 
-install.packages("devtools")
 
 # dir <- tempfile()
 # dir.create(dir)
