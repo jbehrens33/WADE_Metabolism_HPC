@@ -5,18 +5,26 @@
 #install_version("groundhog", version = "3.1.2", repos = "https://cran.rstudio.com")
 
 # Libraries
-library("remotes")
+# library("remotes")
 #library("groundhog")
 
-remotes::install_github('appling/unitted')
+install.packages("devtools")
 
-install.packages("rstan", repos = c('https://stan-dev.r-universe.dev', getOption("repos")))
+# dir <- tempfile()
+# dir.create(dir)
+# pkg <- download.packages("testthat", dir, type = "source")
+# install_local(pkg[, 2])
+# 
+# 
+# remotes::install_github("appling/unitted")
 
-install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
-
-remotes::install_github(
-  "DOI-USGS/streamMetabolizer", # soon to be "DOI-USGS/streamMetabolizer"
-  build_vignettes = TRUE)
+# install.packages("rstan", repos = c('https://stan-dev.r-universe.dev', getOption("repos")))
+# 
+# install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
+# 
+# remotes::install_github(
+#   "DOI-USGS/streamMetabolizer", # soon to be "DOI-USGS/streamMetabolizer"
+#   build_vignettes = TRUE)
 
 # install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
 
